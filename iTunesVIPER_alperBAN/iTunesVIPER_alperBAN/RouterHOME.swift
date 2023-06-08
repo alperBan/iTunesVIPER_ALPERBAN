@@ -6,6 +6,7 @@
 //
 import UIKit
 import Foundation
+
 //entryPoint
 
 typealias EntryPoint = AnyView & UIViewController

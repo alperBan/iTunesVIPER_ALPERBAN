@@ -19,7 +19,7 @@ protocol AnyView {
 class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var presenter: AnyPresenter?
     var songs: [Song] = []
-
+    var selectedSong: Song?
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -199,16 +199,19 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         extraLabel.textColor = .gray
         cell.contentView.addSubview(extraLabel)
 
-        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 70, y: 10, width: 60, height: 70))
+        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 48, y: 25, width: 40, height: 40))
         detailButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
         detailButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         detailButton.setTitleColor(.systemBlue, for: .normal)
+        detailButton.contentHorizontalAlignment = .fill
+        detailButton.contentVerticalAlignment = .fill
         detailButton.addTarget(self, action: #selector(detailButtonTapped(_:)), for: .touchUpInside)
         cell.contentView.addSubview(detailButton)
-        
-        
+
         return cell
     }
+
+    
     @objc private func detailButtonTapped(_ sender: UIButton) {
         let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
         if let indexPath = tableView.indexPathForRow(at: buttonPosition) {

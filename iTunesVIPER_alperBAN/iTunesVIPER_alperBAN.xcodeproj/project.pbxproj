@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		240EB0532A31C0A900A96542 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0522A31C0A900A96542 /* SDWebImage */; };
 		240EB0552A31C0A900A96542 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0542A31C0A900A96542 /* SDWebImageMapKit */; };
+		240EB0642A32333E00A96542 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EB0632A32333E00A96542 /* SongViewController.swift */; };
 		24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2712A3087D40036E0E1 /* AppDelegate.swift */; };
 		24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */; };
 		24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		240EB0632A32333E00A96542 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
 		24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesVIPER_alperBAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ECE2712A3087D40036E0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				24ECE2AA2A3088810036E0E1 /* PresenterHOME.swift */,
 				24ECE2AC2A3088930036E0E1 /* EntityHOME.swift */,
 				24ECE2AE2A3088A00036E0E1 /* RouterHOME.swift */,
+				240EB0632A32333E00A96542 /* SongViewController.swift */,
 			);
 			path = iTunesVIPER_alperBAN;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				24ECE2A92A3088740036E0E1 /* InteractorHOME.swift in Sources */,
 				24ECE2A72A3088610036E0E1 /* ViewHOME.swift in Sources */,
 				24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */,
+				240EB0642A32333E00A96542 /* SongViewController.swift in Sources */,
 				24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */,
 				24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */,
 			);
