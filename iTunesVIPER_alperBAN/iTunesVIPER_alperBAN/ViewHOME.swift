@@ -8,7 +8,7 @@
 import SDWebImage
 import Foundation
 import UIKit
-
+import AVFoundation
 
 protocol AnyView {
     var presenter: AnyPresenter? { get set }
@@ -54,14 +54,14 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 140).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70).isActive = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingSpacing).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -trailingSpacing).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.layer.borderWidth = 2.0
-        tableView.layer.borderColor = UIColor.systemGray4.cgColor
+        tableView.layer.borderColor = UIColor.systemGray6.cgColor
         tableView.layer.cornerRadius = 11.0
     }
 
@@ -73,7 +73,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         textField.placeholder = "Search"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
-
+        
         let clearButton = UIButton(type: .custom)
         clearButton.setImage(UIImage(systemName: "delete.left"), for: .normal)
         clearButton.tintColor = .systemGray3
@@ -87,10 +87,11 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         textField.borderStyle = .roundedRect
         textField.borderStyle = .line
         textField.layer.borderWidth = 2.0
-        textField.layer.borderColor = UIColor.systemGray4.cgColor
+        textField.layer.borderColor = UIColor.systemGray6.cgColor
         textField.layer.cornerRadius = 11.0
         textField.layer.masksToBounds = true
-
+        textField.backgroundColor = .systemGray6
+        
         let searchImageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
         searchImageView.tintColor = .systemGray2
         searchImageView.contentMode = .scaleAspectFit
@@ -101,7 +102,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
         view.addSubview(textField)
 
-        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
     }
@@ -197,21 +198,80 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         extraLabel.font = UIFont.systemFont(ofSize: 15)
         extraLabel.textColor = .gray
         cell.contentView.addSubview(extraLabel)
-        
-        let button = UIButton(frame: CGRect(x: cell.contentView.frame.width - 50, y: 0, width: 30, height: 30))
-        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        button.tintColor = .systemBlue
-        cell.contentView.addSubview(button)
-        
-        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 70, y: 40, width: 70, height: 35))
+
+        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 70, y: 10, width: 60, height: 70))
         detailButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
         detailButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         detailButton.setTitleColor(.systemBlue, for: .normal)
+        detailButton.addTarget(self, action: #selector(detailButtonTapped(_:)), for: .touchUpInside)
         cell.contentView.addSubview(detailButton)
+        
         
         return cell
     }
+    @objc private func detailButtonTapped(_ sender: UIButton) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
+        if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
+            let song = songs[indexPath.row]
+            if let player = self.player, let currentItem = player.currentItem {
+                // Check if the same song is already playing
+                if let currentURL = currentItem.asset as? AVURLAsset, currentURL.url.absoluteString == song.previewUrl {
+                    // Toggle between play and pause
+                    if player.timeControlStatus == .playing {
+                        player.pause()
+                        sender.setImage(UIImage(systemName: "play.circle"), for: .normal)
+                    } else {
+                        player.play()
+                        sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
+                    }
+                } else {
+                    // Play a different song
+                    pauseCurrentlyPlayingSong() // Pause the currently playing song
+                    playAudio(from: song.previewUrl)
+                    sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
+                }
+            } else {
+                // Play the song for the first time
+                pauseCurrentlyPlayingSong() // Pause the currently playing song
+                playAudio(from: song.previewUrl)
+                sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
+            }
+        }
+    }
 
+    private func pauseCurrentlyPlayingSong() {
+        if let player = self.player, let currentItem = player.currentItem {
+            player.pause()
+            if let currentIndexPath = findIndexPath(for: currentItem) {
+                if let cell = tableView.cellForRow(at: currentIndexPath) {
+                    if let detailButton = cell.contentView.subviews.first(where: { $0 is UIButton }) as? UIButton {
+                        detailButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
+                    }
+                }
+            }
+        }
+    }
+
+    private func findIndexPath(for playerItem: AVPlayerItem) -> IndexPath? {
+        for (index, song) in songs.enumerated() {
+            if let currentURL = playerItem.asset as? AVURLAsset, currentURL.url.absoluteString == song.previewUrl {
+                return IndexPath(row: index, section: 0)
+            }
+        }
+        return nil
+    }
+    private var player: AVPlayer?
+
+    private func playAudio(from url: String) {
+        guard let audioURL = URL(string: url) else {
+            // Handle invalid URL
+            return
+        }
+
+        let playerItem = AVPlayerItem(url: audioURL)
+        player = AVPlayer(playerItem: playerItem)
+        player?.play()
+    }
 
     func update(with songs: [Song]) {
         DispatchQueue.main.async {

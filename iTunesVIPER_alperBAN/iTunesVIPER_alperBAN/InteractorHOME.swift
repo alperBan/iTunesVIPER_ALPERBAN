@@ -19,7 +19,7 @@ class SongInteractor: AnyInteractor {
     var searchWord: String = ""
 
     func downloadSong() {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=\(searchWord)&country=TR&media=music") else {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=\(searchWord)&country=TR&entity=song") else {
             return
         }
 
