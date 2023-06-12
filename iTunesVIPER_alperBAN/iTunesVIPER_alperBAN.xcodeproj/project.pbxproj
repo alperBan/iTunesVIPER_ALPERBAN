@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		240EB0532A31C0A900A96542 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0522A31C0A900A96542 /* SDWebImage */; };
 		240EB0552A31C0A900A96542 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0542A31C0A900A96542 /* SDWebImageMapKit */; };
-		240EB0642A32333E00A96542 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EB0632A32333E00A96542 /* SongViewController.swift */; };
+		249137B72A35F4BD00D59974 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137B52A35F4BD00D59974 /* DetailViewController.swift */; };
+		249137B82A35F4BD00D59974 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249137B62A35F4BD00D59974 /* DetailViewController.xib */; };
+		249137BA2A35F9D000D59974 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137B92A35F9D000D59974 /* DetailInteractor.swift */; };
+		249137BC2A35FB3A00D59974 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BB2A35FB3A00D59974 /* DetailPresenter.swift */; };
+		249137BE2A35FB8B00D59974 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BD2A35FB8B00D59974 /* DetailRouter.swift */; };
+		249137CE2A360F7100D59974 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137CD2A360F7100D59974 /* BaseViewController.swift */; };
 		24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2712A3087D40036E0E1 /* AppDelegate.swift */; };
 		24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */; };
 		24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */; };
@@ -18,11 +23,11 @@
 		24ECE28C2A3087D50036E0E1 /* iTunesVIPER_alperBANTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE28B2A3087D50036E0E1 /* iTunesVIPER_alperBANTests.swift */; };
 		24ECE2962A3087D50036E0E1 /* iTunesVIPER_alperBANUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2952A3087D50036E0E1 /* iTunesVIPER_alperBANUITests.swift */; };
 		24ECE2982A3087D50036E0E1 /* iTunesVIPER_alperBANUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2972A3087D50036E0E1 /* iTunesVIPER_alperBANUITestsLaunchTests.swift */; };
-		24ECE2A72A3088610036E0E1 /* ViewHOME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2A62A3088610036E0E1 /* ViewHOME.swift */; };
-		24ECE2A92A3088740036E0E1 /* InteractorHOME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2A82A3088740036E0E1 /* InteractorHOME.swift */; };
-		24ECE2AB2A3088810036E0E1 /* PresenterHOME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AA2A3088810036E0E1 /* PresenterHOME.swift */; };
-		24ECE2AD2A3088930036E0E1 /* EntityHOME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AC2A3088930036E0E1 /* EntityHOME.swift */; };
-		24ECE2AF2A3088A00036E0E1 /* RouterHOME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AE2A3088A00036E0E1 /* RouterHOME.swift */; };
+		24ECE2A72A3088610036E0E1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2A62A3088610036E0E1 /* HomeView.swift */; };
+		24ECE2A92A3088740036E0E1 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2A82A3088740036E0E1 /* HomeInteractor.swift */; };
+		24ECE2AB2A3088810036E0E1 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AA2A3088810036E0E1 /* HomePresenter.swift */; };
+		24ECE2AD2A3088930036E0E1 /* HomeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AC2A3088930036E0E1 /* HomeEntity.swift */; };
+		24ECE2AF2A3088A00036E0E1 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2AE2A3088A00036E0E1 /* HomeRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		240EB0632A32333E00A96542 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
+		249137B52A35F4BD00D59974 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		249137B62A35F4BD00D59974 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		249137B92A35F9D000D59974 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		249137BB2A35FB3A00D59974 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		249137BD2A35FB8B00D59974 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		249137CD2A360F7100D59974 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesVIPER_alperBAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ECE2712A3087D40036E0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,11 +66,11 @@
 		24ECE2912A3087D50036E0E1 /* iTunesVIPER_alperBANUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesVIPER_alperBANUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ECE2952A3087D50036E0E1 /* iTunesVIPER_alperBANUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesVIPER_alperBANUITests.swift; sourceTree = "<group>"; };
 		24ECE2972A3087D50036E0E1 /* iTunesVIPER_alperBANUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesVIPER_alperBANUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		24ECE2A62A3088610036E0E1 /* ViewHOME.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHOME.swift; sourceTree = "<group>"; };
-		24ECE2A82A3088740036E0E1 /* InteractorHOME.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorHOME.swift; sourceTree = "<group>"; };
-		24ECE2AA2A3088810036E0E1 /* PresenterHOME.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterHOME.swift; sourceTree = "<group>"; };
-		24ECE2AC2A3088930036E0E1 /* EntityHOME.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityHOME.swift; sourceTree = "<group>"; };
-		24ECE2AE2A3088A00036E0E1 /* RouterHOME.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterHOME.swift; sourceTree = "<group>"; };
+		24ECE2A62A3088610036E0E1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		24ECE2A82A3088740036E0E1 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		24ECE2AA2A3088810036E0E1 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		24ECE2AC2A3088930036E0E1 /* HomeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEntity.swift; sourceTree = "<group>"; };
+		24ECE2AE2A3088A00036E0E1 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		249137B22A35F45400D59974 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				24ECE2712A3087D40036E0E1 /* AppDelegate.swift */,
+				24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */,
+				24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		249137B32A35F46900D59974 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				24ECE2A62A3088610036E0E1 /* HomeView.swift */,
+				24ECE2A82A3088740036E0E1 /* HomeInteractor.swift */,
+				24ECE2AA2A3088810036E0E1 /* HomePresenter.swift */,
+				24ECE2AC2A3088930036E0E1 /* HomeEntity.swift */,
+				24ECE2AE2A3088A00036E0E1 /* HomeRouter.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		249137B42A35F48D00D59974 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				249137B52A35F4BD00D59974 /* DetailViewController.swift */,
+				249137B62A35F4BD00D59974 /* DetailViewController.xib */,
+				249137B92A35F9D000D59974 /* DetailInteractor.swift */,
+				249137BB2A35FB3A00D59974 /* DetailPresenter.swift */,
+				249137BD2A35FB8B00D59974 /* DetailRouter.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		249137CC2A360F5F00D59974 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				249137CD2A360F7100D59974 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		24ECE2652A3087D40036E0E1 = {
 			isa = PBXGroup;
 			children = (
@@ -121,18 +173,13 @@
 		24ECE2702A3087D40036E0E1 /* iTunesVIPER_alperBAN */ = {
 			isa = PBXGroup;
 			children = (
-				24ECE2712A3087D40036E0E1 /* AppDelegate.swift */,
-				24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */,
+				249137CC2A360F5F00D59974 /* Base */,
+				249137B22A35F45400D59974 /* App */,
+				249137B32A35F46900D59974 /* Home */,
+				249137B42A35F48D00D59974 /* Detail */,
 				24ECE27D2A3087D50036E0E1 /* Assets.xcassets */,
 				24ECE27F2A3087D50036E0E1 /* LaunchScreen.storyboard */,
 				24ECE2822A3087D50036E0E1 /* Info.plist */,
-				24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */,
-				24ECE2A62A3088610036E0E1 /* ViewHOME.swift */,
-				24ECE2A82A3088740036E0E1 /* InteractorHOME.swift */,
-				24ECE2AA2A3088810036E0E1 /* PresenterHOME.swift */,
-				24ECE2AC2A3088930036E0E1 /* EntityHOME.swift */,
-				24ECE2AE2A3088A00036E0E1 /* RouterHOME.swift */,
-				240EB0632A32333E00A96542 /* SongViewController.swift */,
 			);
 			path = iTunesVIPER_alperBAN;
 			sourceTree = "<group>";
@@ -266,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24ECE2812A3087D50036E0E1 /* LaunchScreen.storyboard in Resources */,
+				249137B82A35F4BD00D59974 /* DetailViewController.xib in Resources */,
 				24ECE27E2A3087D50036E0E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,13 +339,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24ECE2AF2A3088A00036E0E1 /* RouterHOME.swift in Sources */,
-				24ECE2AD2A3088930036E0E1 /* EntityHOME.swift in Sources */,
-				24ECE2AB2A3088810036E0E1 /* PresenterHOME.swift in Sources */,
-				24ECE2A92A3088740036E0E1 /* InteractorHOME.swift in Sources */,
-				24ECE2A72A3088610036E0E1 /* ViewHOME.swift in Sources */,
+				249137B72A35F4BD00D59974 /* DetailViewController.swift in Sources */,
+				249137BA2A35F9D000D59974 /* DetailInteractor.swift in Sources */,
+				24ECE2AF2A3088A00036E0E1 /* HomeRouter.swift in Sources */,
+				24ECE2AD2A3088930036E0E1 /* HomeEntity.swift in Sources */,
+				249137BC2A35FB3A00D59974 /* DetailPresenter.swift in Sources */,
+				24ECE2AB2A3088810036E0E1 /* HomePresenter.swift in Sources */,
+				249137CE2A360F7100D59974 /* BaseViewController.swift in Sources */,
+				24ECE2A92A3088740036E0E1 /* HomeInteractor.swift in Sources */,
+				24ECE2A72A3088610036E0E1 /* HomeView.swift in Sources */,
 				24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */,
-				240EB0642A32333E00A96542 /* SongViewController.swift in Sources */,
+				249137BE2A35FB8B00D59974 /* DetailRouter.swift in Sources */,
 				24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */,
 				24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */,
 			);

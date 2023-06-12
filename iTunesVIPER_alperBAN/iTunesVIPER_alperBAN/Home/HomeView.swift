@@ -1,5 +1,5 @@
 //
-//  ViewHOME.swift
+//  HomeView.swift
 //  iTunesVIPER_alperBAN
 //
 //  Created by Alper Ban on 7.06.2023.
@@ -18,8 +18,9 @@ protocol AnyView {
 
 class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var presenter: AnyPresenter?
-    var songs: [Song] = []
     var selectedSong: Song?
+    var songs: [Song] = []
+    
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -45,7 +46,10 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         setupGestureRecognizer()
         let textField = view.subviews.first(where: { $0 is UITextField }) as? UITextField
             textField?.addTarget(self, action: #selector(textFieldEditingDidBegin), for: .editingDidBegin)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    
+
 
     private func setupTableView() {
         view.addSubview(tableView)
@@ -73,6 +77,8 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         textField.placeholder = "Search"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
+        textField.returnKeyType = .search
+        
         
         let clearButton = UIButton(type: .custom)
         clearButton.setImage(UIImage(systemName: "delete.left"), for: .normal)
@@ -106,6 +112,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
     }
+    
 
     private func setupGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -135,6 +142,17 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.keyboardAppearance = .dark  // Set the keyboard appearance to dark
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let textField = view.subviews.first(where: { $0 is UITextField }) as? UITextField {
+            textField.becomeFirstResponder()
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if let searchTerm = textField.text, !searchTerm.isEmpty {
@@ -143,10 +161,14 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
             
             presenter?.interactor?.searchWord = convertedTerm
             presenter?.interactor?.downloadSong()
+        } else {
+            let alertController = UIAlertController(title: "Uyarı", message: "Lütfen bir arama terimi girin", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
         }
         return true
     }
-
     func convertTurkishCharacters(_ input: String) -> String {
         let turkishCharacters = ["ı": "i", "ğ": "g", "ü": "u", "ş": "s", "ö": "o", "ç": "c", "İ": "I", "Ğ": "G", "Ü": "U", "Ş": "S", "Ö": "O", "Ç": "C"]
         
@@ -199,7 +221,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         extraLabel.textColor = .gray
         cell.contentView.addSubview(extraLabel)
 
-        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 48, y: 25, width: 40, height: 40))
+        let detailButton = UIButton(frame: CGRect(x: cell.contentView.frame.width - 48, y: 25, width: 35, height: 35))
         detailButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
         detailButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         detailButton.setTitleColor(.systemBlue, for: .normal)
@@ -294,3 +316,4 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         }
     }
 }
+

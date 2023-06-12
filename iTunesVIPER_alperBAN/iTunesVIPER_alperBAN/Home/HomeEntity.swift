@@ -1,5 +1,5 @@
 //
-//  EntityHOME.swift
+//  HomeEntity.swift
 //  iTunesVIPER_alperBAN
 //
 //  Created by Alper Ban on 7.06.2023.
@@ -14,6 +14,8 @@ struct Song: Decodable {
     let trackPrice: Double
     let collectionName: String
     let previewUrl: String
+    let collectionPrice: Double
+    let primaryGenreName: String
 }
 
 struct SongsResponse: Decodable {

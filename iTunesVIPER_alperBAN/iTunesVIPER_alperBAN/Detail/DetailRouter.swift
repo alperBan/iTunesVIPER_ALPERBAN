@@ -1,22 +1,23 @@
 //
-//  RouterHOME.swift
+//  DetailRouter.swift
 //  iTunesVIPER_alperBAN
 //
-//  Created by Alper Ban on 7.06.2023.
+//  Created by Alper Ban on 11.06.2023.
 //
+
 import UIKit
 import Foundation
 
 //entryPoint
 
-typealias EntryPoint = AnyView & UIViewController
 
-protocol AnyRouter {
+
+protocol DetaiRouter{
     var entry: EntryPoint? {get}
-    static func startExecution() -> AnyRouter
+    static func startExecution() -> DetaiRouter
 }
 
-class SongRouter : AnyRouter {
+class DetailRouter : AnyRouter {
     var entry: EntryPoint?
     
     static func startExecution() -> AnyRouter {
@@ -31,7 +32,6 @@ class SongRouter : AnyRouter {
         presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
-        router.entry = view as? EntryPoint
         return router
         
     }
