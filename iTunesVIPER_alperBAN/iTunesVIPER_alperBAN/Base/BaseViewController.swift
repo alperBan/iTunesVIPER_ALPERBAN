@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import LoadingPackage
 
-class BaseViewController: UIViewController{
+class BaseViewController: UIViewController,LoadingShowable{
 
     override func viewDidLoad() {
         super.viewDidLoad()

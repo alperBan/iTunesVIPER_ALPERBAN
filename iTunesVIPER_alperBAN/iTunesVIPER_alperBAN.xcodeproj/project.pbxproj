@@ -15,6 +15,7 @@
 		249137BC2A35FB3A00D59974 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BB2A35FB3A00D59974 /* DetailPresenter.swift */; };
 		249137BE2A35FB8B00D59974 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BD2A35FB8B00D59974 /* DetailRouter.swift */; };
 		249137CE2A360F7100D59974 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137CD2A360F7100D59974 /* BaseViewController.swift */; };
+		24DA40B12A374DFD00BD5379 /* LoadingPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 24DA40B02A374DFD00BD5379 /* LoadingPackage */; };
 		24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2712A3087D40036E0E1 /* AppDelegate.swift */; };
 		24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */; };
 		24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */; };
@@ -54,6 +55,7 @@
 		249137BB2A35FB3A00D59974 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		249137BD2A35FB8B00D59974 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		249137CD2A360F7100D59974 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		24DA40AF2A374D5F00BD5379 /* LoadingPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LoadingPackage; path = ../../iTunes_Viper_AlperBAN/LoadingPackage; sourceTree = "<group>"; };
 		24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesVIPER_alperBAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ECE2712A3087D40036E0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			files = (
 				240EB0532A31C0A900A96542 /* SDWebImage in Frameworks */,
 				240EB0552A31C0A900A96542 /* SDWebImageMapKit in Frameworks */,
+				24DA40B12A374DFD00BD5379 /* LoadingPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +155,7 @@
 		24ECE2652A3087D40036E0E1 = {
 			isa = PBXGroup;
 			children = (
+				24DA40AF2A374D5F00BD5379 /* LoadingPackage */,
 				24ECE2702A3087D40036E0E1 /* iTunesVIPER_alperBAN */,
 				24ECE28A2A3087D50036E0E1 /* iTunesVIPER_alperBANTests */,
 				24ECE2942A3087D50036E0E1 /* iTunesVIPER_alperBANUITests */,
@@ -220,6 +224,7 @@
 			packageProductDependencies = (
 				240EB0522A31C0A900A96542 /* SDWebImage */,
 				240EB0542A31C0A900A96542 /* SDWebImageMapKit */,
+				24DA40B02A374DFD00BD5379 /* LoadingPackage */,
 			);
 			productName = iTunesVIPER_alperBAN;
 			productReference = 24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */;
@@ -705,6 +710,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 240EB0512A31C0A900A96542 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		24DA40B02A374DFD00BD5379 /* LoadingPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoadingPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

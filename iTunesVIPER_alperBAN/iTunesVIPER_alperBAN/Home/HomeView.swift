@@ -4,7 +4,7 @@
 //
 //  Created by Alper Ban on 7.06.2023.
 //
-
+import LoadingPackage
 import SDWebImage
 import Foundation
 import UIKit
@@ -14,13 +14,14 @@ protocol AnyView {
     var presenter: AnyPresenter? { get set }
     func update(with songs: [Song])
     func update(with error: String)
+    
 }
 
 class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var presenter: AnyPresenter?
     var selectedSong: Song?
     var songs: [Song] = []
-    
+
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -47,6 +48,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         let textField = view.subviews.first(where: { $0 is UITextField }) as? UITextField
             textField?.addTarget(self, action: #selector(textFieldEditingDidBegin), for: .editingDidBegin)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
     }
     
 
@@ -67,6 +69,9 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         tableView.layer.borderWidth = 2.0
         tableView.layer.borderColor = UIColor.systemGray6.cgColor
         tableView.layer.cornerRadius = 11.0
+        let backgroundImage = UIImageView(image: UIImage(named: "111"))
+            backgroundImage.contentMode = .scaleAspectFill
+            tableView.backgroundView = backgroundImage
     }
 
 
@@ -162,10 +167,16 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
             presenter?.interactor?.searchWord = convertedTerm
             presenter?.interactor?.downloadSong()
         } else {
-            let alertController = UIAlertController(title: "Uyarı", message: "Lütfen bir arama terimi girin", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+            let alertController = UIAlertController(title: "Warning", message: "Please enter a search term", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
+            
+            songs = []
+            tableView.reloadData()
+            messageLabel.isHidden = false
+            tableView.isHidden = true
+            messageLabel.text = "No Songs Available"
         }
         return true
     }

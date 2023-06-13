@@ -1,4 +1,3 @@
-//
 //  iTunesVIPER_alperBANUITests.swift
 //  iTunesVIPER_alperBANUITests
 //
@@ -6,36 +5,176 @@
 //
 
 import XCTest
+@testable import iTunesVIPER_alperBAN
 
-final class iTunesVIPER_alperBANUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+final class SongHomeViewControllerTests: XCTestCase {
+    
+    var viewController: SongHomeViewController!
+    
+    override func setUp() {
+        super.setUp()
+        
+        viewController = SongHomeViewController()
+        viewController.loadViewIfNeeded()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        viewController = nil
+        
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testViewDidLoad() {
+        XCTAssertNotNil(viewController.tableView)
+        XCTAssertNotNil(viewController.messageLabel)
+        XCTAssertEqual(viewController.messageLabel.text, "Best Song is Loading")
+        XCTAssertNil(viewController.presenter)
+        XCTAssertTrue(viewController.tableView.isHidden)
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testClearButtonTapped() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        viewController.songs = [Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1")]
+        viewController.tableView.reloadData()
+        
+        viewController.clearButtonTapped()
+        
+        XCTAssertTrue(presenterMock.clearSearchCalled)
+        XCTAssertEqual(viewController.songs, [])
+        XCTAssertTrue(viewController.tableView.isHidden)
+        XCTAssertEqual(viewController.messageLabel.text, "Best Song is Loading")
+    }
+    
+    func testTextFieldShouldReturn_WithEmptyText() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        viewController.textField.text = ""
+        
+        let returnValue = viewController.textFieldShouldReturn(viewController.textField)
+        
+        XCTAssertFalse(returnValue)
+        XCTAssertFalse(presenterMock.fetchSongsCalled)
+        XCTAssertEqual(viewController.songs, [])
+        XCTAssertTrue(viewController.tableView.isHidden)
+        XCTAssertEqual(viewController.messageLabel.text, "No Songs Available")
+    }
+    
+    func testTextFieldShouldReturn_WithSearchTerm() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        viewController.textField.text = "Test"
+        
+        let returnValue = viewController.textFieldShouldReturn(viewController.textField)
+        
+        XCTAssertTrue(returnValue)
+        XCTAssertTrue(presenterMock.fetchSongsCalled)
+        XCTAssertEqual(presenterMock.searchTerm, "Test")
+    }
+    
+    func testDetailButtonTapped_PlayingSameSong() {
+        let playerMock = PlayerMock()
+        viewController.player = playerMock
+        viewController.songs = [Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1")]
+        viewController.tableView.reloadData()
+        
+        let detailButton = UIButton()
+        detailButton.tag = 0
+        viewController.detailButtonTapped(detailButton)
+        
+        XCTAssertTrue(playerMock.togglePlayPauseCalled)
+    }
+    
+    func testDetailButtonTapped_PlayingDifferentSong() {
+        let playerMock = PlayerMock()
+        viewController.player = playerMock
+        viewController.songs = [
+            Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1"),
+            Song(trackName: "Song 2", artistName: "Artist 2", collectionName: "Collection 2", artworkUrl100: "url2", previewUrl: "url2")
+        ]
+        viewController.tableView.reloadData()
+        
+        let detailButton = UIButton()
+        detailButton.tag = 1
+        viewController.detailButtonTapped(detailButton)
+        
+        XCTAssertTrue(playerMock.pauseCalled)
+        XCTAssertTrue(playerMock.playCalled)
+    }
+    
+    func testDetailButtonTapped_PlayingFirstTime() {
+        let playerMock = PlayerMock()
+        viewController.player = playerMock
+        viewController.songs = []
+        viewController.tableView.reloadData()
+        
+        let detailButton = UIButton()
+        detailButton.tag = 0
+        viewController.detailButtonTapped(detailButton)
+        
+        XCTAssertTrue(playerMock.playCalled)
+    }
+    
+    func testFetchSongsSuccess() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        let songs = [
+            Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1"),
+            Song(trackName: "Song 2", artistName: "Artist 2", collectionName: "Collection 2", artworkUrl100: "url2", previewUrl: "url2")
+        ]
+        viewController.fetchSongsSuccess(songs)
+        
+        XCTAssertEqual(viewController.songs, songs)
+        XCTAssertTrue(viewController.tableView.isHidden)
+        XCTAssertEqual(viewController.messageLabel.text, "No Songs Available")
+    }
+    
+    func testFetchSongsFailure() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        viewController.fetchSongsFailure()
+        
+        XCTAssertEqual(viewController.songs, [])
+        XCTAssertTrue(viewController.tableView.isHidden)
+        XCTAssertEqual(viewController.messageLabel.text, "Failed to Fetch Songs")
+    }
+    
+    func testSearchButtonTapped() {
+        let presenterMock = PresenterMock()
+        viewController.presenter = presenterMock
+        
+        viewController.textField.text = "Test"
+        viewController.searchButtonTapped(UIButton())
+        
+        XCTAssertTrue(presenterMock.fetchSongsCalled)
+        XCTAssertEqual(presenterMock.searchTerm, "Test")
+    }
+    
+    func testTableViewNumberOfRowsInSection() {
+        viewController.songs = [
+            Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1"),
+            Song(trackName: "Song 2", artistName: "Artist 2", collectionName: "Collection 2", artworkUrl100: "url2", previewUrl: "url2")
+        ]
+        viewController.tableView.reloadData()
+        
+        let numberOfRows = viewController.tableView(viewController.tableView, numberOfRowsInSection: 0)
+        
+        XCTAssertEqual(numberOfRows, 2)
+    }
+    
+    func testTableViewCellForRowAtIndexPath() {
+        let songs = [
+            Song(trackName: "Song 1", artistName: "Artist 1", collectionName: "Collection 1", artworkUrl100: "url1", previewUrl: "url1"),
+            Song(trackName: "Song 2", artistName: "Artist 2", collectionName: "Collection 2", artworkUrl100: "url2", previewUrl: "url2")
+        ]
+        viewController.songs = songs
+        viewController.tableView.reloadData()
+        
+        let indexPath = IndexPath(row: 1, section: 0)
+        let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as? SongTableViewCell
+        
+        XCTAssertNotNil(cell)
+        XCTAssertEqual(cell?.songTitleLabel.text, songs[indexPath.row].trackName)
+        XCTAssertEqual(cell?.artistNameLabel.text, songs[indexPath.row].artistName)
     }
 }
