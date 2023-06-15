@@ -5,7 +5,19 @@ This README file provides information on how to install, use, and contribute to 
 ## About the Project
 
 The Song Search Application is a mobile application developed using the VIPER (View, Interactor, Presenter, Entity, Router) architecture. It allows users to search for songs by their title. Users can view the search results in a table view and listen to a sample of the selected song.
-## Screen Shot & Screen Recording
+## Screen Recording
+
+
+https://github.com/alperBan/iTunesVIPER_ALPERBAN/assets/114400196/615d236b-9f23-4496-9731-edf1007ea6df
+
+
+https://github.com/alperBan/iTunesVIPER_ALPERBAN/assets/114400196/a94aa560-7505-4cc5-9552-42f01175cc12
+
+
+
+
+
+
 
 ## Features
 
