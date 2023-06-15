@@ -17,10 +17,18 @@ protocol AnyView {
     
 }
 
-class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, LoadingShowable {
     var presenter: AnyPresenter?
     var selectedSong: Song?
     var songs: [Song] = []
+    var textField: UITextField!
+  func showLoading() {
+    LoadingView.shared.startLoading()
+  }
+
+  func hideLoading() {
+    LoadingView.shared.hideLoading()
+  }
 
     private let tableView: UITableView = {
         let table = UITableView()
@@ -77,7 +85,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
 
     private func setupSearchTextField() {
-        let textField = UITextField()
+        textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Search"
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -130,9 +138,8 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
     @objc private func clearButtonTapped() {
         if let textField = view.subviews.first(where: { $0 is UITextField }) as? UITextField {
-            textField.text = ""
-            presenter?.interactor?.searchWord = ""
-            
+            textField.text = "" // textField'a erişmek için önceki yerel değişken kaldırıldı
+                   presenter?.interactor?.searchWord = ""
     
             songs = []
             tableView.reloadData()
@@ -149,7 +156,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.keyboardAppearance = .dark  // Set the keyboard appearance to dark
+        textField.keyboardAppearance = .dark
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -158,28 +165,30 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        if let searchTerm = textField.text, !searchTerm.isEmpty {
-            let mergedTerm = searchTerm.replacingOccurrences(of: " ", with: "")
-            let convertedTerm = convertTurkishCharacters(mergedTerm)
-            
-            presenter?.interactor?.searchWord = convertedTerm
-            presenter?.interactor?.downloadSong()
-        } else {
-            let alertController = UIAlertController(title: "Warning", message: "Please enter a search term", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-            
-            songs = []
-            tableView.reloadData()
-            messageLabel.isHidden = false
-            tableView.isHidden = true
-            messageLabel.text = "No Songs Available"
-        }
-        return true
-    }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      textField.resignFirstResponder()
+      if let searchTerm = textField.text, !searchTerm.isEmpty {
+          let mergedTerm = searchTerm.replacingOccurrences(of: " ", with: "")
+          let convertedTerm = convertTurkishCharacters(mergedTerm)
+
+          presenter?.interactor?.searchWord = convertedTerm
+          showLoading()
+          presenter?.interactor?.downloadSong()
+      } else {
+          let alertController = UIAlertController(title: "Warning", message: "Please enter a search term", preferredStyle: .alert)
+          let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+          alertController.addAction(okAction)
+          present(alertController, animated: true, completion: nil)
+
+          songs = []
+          tableView.reloadData()
+          messageLabel.isHidden = false
+          tableView.isHidden = true
+          messageLabel.text = "No Songs Available"
+      }
+      return true
+  }
+
     func convertTurkishCharacters(_ input: String) -> String {
         let turkishCharacters = ["ı": "i", "ğ": "g", "ü": "u", "ş": "s", "ö": "o", "ç": "c", "İ": "I", "Ğ": "G", "Ü": "U", "Ş": "S", "Ö": "O", "Ç": "C"]
         
@@ -250,9 +259,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
         if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
             let song = songs[indexPath.row]
             if let player = self.player, let currentItem = player.currentItem {
-                // Check if the same song is already playing
                 if let currentURL = currentItem.asset as? AVURLAsset, currentURL.url.absoluteString == song.previewUrl {
-                    // Toggle between play and pause
                     if player.timeControlStatus == .playing {
                         player.pause()
                         sender.setImage(UIImage(systemName: "play.circle"), for: .normal)
@@ -261,14 +268,12 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
                         sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
                     }
                 } else {
-                    // Play a different song
-                    pauseCurrentlyPlayingSong() // Pause the currently playing song
+                    pauseCurrentlyPlayingSong()
                     playAudio(from: song.previewUrl)
                     sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
                 }
             } else {
-                // Play the song for the first time
-                pauseCurrentlyPlayingSong() // Pause the currently playing song
+                pauseCurrentlyPlayingSong()
                 playAudio(from: song.previewUrl)
                 sender.setImage(UIImage(systemName: "pause.circle"), for: .normal)
             }
@@ -300,7 +305,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
     private func playAudio(from url: String) {
         guard let audioURL = URL(string: url) else {
-            // Handle invalid URL
+          
             return
         }
 
@@ -311,20 +316,34 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
     func update(with songs: [Song]) {
         DispatchQueue.main.async {
+            self.hideLoading()
             self.songs = songs
-            self.messageLabel.isHidden = true
             self.tableView.reloadData()
-            self.tableView.isHidden = false
+            
+            if songs.isEmpty && self.textField.text?.isEmpty == false {
+                let alertController = UIAlertController(title: "Hata", message: "Arama sonucunda şarkı bulunamadı.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+                self.tableView.isHidden = true
+                self.messageLabel.isHidden = true
+            } else {
+                self.tableView.isHidden = false
+                self.messageLabel.isHidden = true
+            }
         }
     }
 
-    func update(with error: String) {
-        DispatchQueue.main.async {
-            self.songs = []
-            self.tableView.isHidden = true
-            self.messageLabel.text = error
-            self.messageLabel.isHidden = false
-        }
-    }
+  func update(with error: String) {
+      DispatchQueue.main.async {
+          self.hideLoading()
+          self.songs = []
+          self.tableView.isHidden = true
+          self.messageLabel.text = error
+          self.messageLabel.isHidden = false
+      }
+  }
+
 }
 

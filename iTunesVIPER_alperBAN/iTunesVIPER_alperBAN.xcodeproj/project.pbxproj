@@ -7,15 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24027EC82A3B085C00344EB6 /* LoadingPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 24027EC72A3B085C00344EB6 /* LoadingPackage */; };
 		240EB0532A31C0A900A96542 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0522A31C0A900A96542 /* SDWebImage */; };
 		240EB0552A31C0A900A96542 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 240EB0542A31C0A900A96542 /* SDWebImageMapKit */; };
-		249137B72A35F4BD00D59974 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137B52A35F4BD00D59974 /* DetailViewController.swift */; };
-		249137B82A35F4BD00D59974 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249137B62A35F4BD00D59974 /* DetailViewController.xib */; };
-		249137BA2A35F9D000D59974 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137B92A35F9D000D59974 /* DetailInteractor.swift */; };
-		249137BC2A35FB3A00D59974 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BB2A35FB3A00D59974 /* DetailPresenter.swift */; };
-		249137BE2A35FB8B00D59974 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137BD2A35FB8B00D59974 /* DetailRouter.swift */; };
-		249137CE2A360F7100D59974 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249137CD2A360F7100D59974 /* BaseViewController.swift */; };
-		24DA40B12A374DFD00BD5379 /* LoadingPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 24DA40B02A374DFD00BD5379 /* LoadingPackage */; };
 		24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2712A3087D40036E0E1 /* AppDelegate.swift */; };
 		24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */; };
 		24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24ECE27A2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld */; };
@@ -49,13 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		249137B52A35F4BD00D59974 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		249137B62A35F4BD00D59974 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
-		249137B92A35F9D000D59974 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
-		249137BB2A35FB3A00D59974 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
-		249137BD2A35FB8B00D59974 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
-		249137CD2A360F7100D59974 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		24DA40AF2A374D5F00BD5379 /* LoadingPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LoadingPackage; path = ../../iTunes_Viper_AlperBAN/LoadingPackage; sourceTree = "<group>"; };
+		24027EC62A3B073500344EB6 /* LoadingPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LoadingPackage; path = iTunesVIPER_alperBAN/LoadingPackage; sourceTree = "<group>"; };
 		24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesVIPER_alperBAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ECE2712A3087D40036E0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24ECE2732A3087D40036E0E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +70,7 @@
 			files = (
 				240EB0532A31C0A900A96542 /* SDWebImage in Frameworks */,
 				240EB0552A31C0A900A96542 /* SDWebImageMapKit in Frameworks */,
-				24DA40B12A374DFD00BD5379 /* LoadingPackage in Frameworks */,
+				24027EC82A3B085C00344EB6 /* LoadingPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,30 +120,10 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		249137B42A35F48D00D59974 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				249137B52A35F4BD00D59974 /* DetailViewController.swift */,
-				249137B62A35F4BD00D59974 /* DetailViewController.xib */,
-				249137B92A35F9D000D59974 /* DetailInteractor.swift */,
-				249137BB2A35FB3A00D59974 /* DetailPresenter.swift */,
-				249137BD2A35FB8B00D59974 /* DetailRouter.swift */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
-		249137CC2A360F5F00D59974 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				249137CD2A360F7100D59974 /* BaseViewController.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		24ECE2652A3087D40036E0E1 = {
 			isa = PBXGroup;
 			children = (
-				24DA40AF2A374D5F00BD5379 /* LoadingPackage */,
+				24027EC62A3B073500344EB6 /* LoadingPackage */,
 				24ECE2702A3087D40036E0E1 /* iTunesVIPER_alperBAN */,
 				24ECE28A2A3087D50036E0E1 /* iTunesVIPER_alperBANTests */,
 				24ECE2942A3087D50036E0E1 /* iTunesVIPER_alperBANUITests */,
@@ -177,10 +145,8 @@
 		24ECE2702A3087D40036E0E1 /* iTunesVIPER_alperBAN */ = {
 			isa = PBXGroup;
 			children = (
-				249137CC2A360F5F00D59974 /* Base */,
 				249137B22A35F45400D59974 /* App */,
 				249137B32A35F46900D59974 /* Home */,
-				249137B42A35F48D00D59974 /* Detail */,
 				24ECE27D2A3087D50036E0E1 /* Assets.xcassets */,
 				24ECE27F2A3087D50036E0E1 /* LaunchScreen.storyboard */,
 				24ECE2822A3087D50036E0E1 /* Info.plist */,
@@ -224,7 +190,7 @@
 			packageProductDependencies = (
 				240EB0522A31C0A900A96542 /* SDWebImage */,
 				240EB0542A31C0A900A96542 /* SDWebImageMapKit */,
-				24DA40B02A374DFD00BD5379 /* LoadingPackage */,
+				24027EC72A3B085C00344EB6 /* LoadingPackage */,
 			);
 			productName = iTunesVIPER_alperBAN;
 			productReference = 24ECE26E2A3087D40036E0E1 /* iTunesVIPER_alperBAN.app */;
@@ -318,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				24ECE2812A3087D50036E0E1 /* LaunchScreen.storyboard in Resources */,
-				249137B82A35F4BD00D59974 /* DetailViewController.xib in Resources */,
 				24ECE27E2A3087D50036E0E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,17 +309,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				249137B72A35F4BD00D59974 /* DetailViewController.swift in Sources */,
-				249137BA2A35F9D000D59974 /* DetailInteractor.swift in Sources */,
 				24ECE2AF2A3088A00036E0E1 /* HomeRouter.swift in Sources */,
 				24ECE2AD2A3088930036E0E1 /* HomeEntity.swift in Sources */,
-				249137BC2A35FB3A00D59974 /* DetailPresenter.swift in Sources */,
 				24ECE2AB2A3088810036E0E1 /* HomePresenter.swift in Sources */,
-				249137CE2A360F7100D59974 /* BaseViewController.swift in Sources */,
 				24ECE2A92A3088740036E0E1 /* HomeInteractor.swift in Sources */,
 				24ECE2A72A3088610036E0E1 /* HomeView.swift in Sources */,
 				24ECE27C2A3087D40036E0E1 /* iTunesVIPER_alperBAN.xcdatamodeld in Sources */,
-				249137BE2A35FB8B00D59974 /* DetailRouter.swift in Sources */,
 				24ECE2722A3087D40036E0E1 /* AppDelegate.swift in Sources */,
 				24ECE2742A3087D40036E0E1 /* SceneDelegate.swift in Sources */,
 			);
@@ -701,6 +661,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		24027EC72A3B085C00344EB6 /* LoadingPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoadingPackage;
+		};
 		240EB0522A31C0A900A96542 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 240EB0512A31C0A900A96542 /* XCRemoteSwiftPackageReference "SDWebImage" */;
@@ -710,10 +674,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 240EB0512A31C0A900A96542 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
-		};
-		24DA40B02A374DFD00BD5379 /* LoadingPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = LoadingPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
