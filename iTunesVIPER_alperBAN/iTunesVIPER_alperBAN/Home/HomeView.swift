@@ -129,6 +129,7 @@ class SongHomeViewController: UIViewController, AnyView, UITableViewDelegate, UI
 
     private func setupGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false // Allows tap gesture to be recognized alongside other touch events
         view.addGestureRecognizer(tapGesture)
     }
 
